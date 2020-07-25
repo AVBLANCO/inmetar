@@ -1,0 +1,53 @@
+{% extends 'gestion/base_comercial.html' %}
+{% block content %}
+{% load humanize %}
+
+   
+  <h2>Ítems con aprobación pendiente</h2>
+
+	<table class="table table-bordered table-sm">
+	{% for cotiz in lista_cotiz%}
+
+  <thead class="thead-dark">
+		<tr>
+				<td>Cot. {{ cotiz.id }}</td>
+				<td colspan="5"><a href={% url "detalle_cotizacion" cotiz.pk %}>
+					{{ cotiz.cliente.razon_social }}</a></td>
+				<td colspan="2">Planta: {{ cotiz.planta.denominacion }}</td>
+				<td>{{ cotiz.fecha }}</td>
+				<td>Vendedor: {{ cotiz.autor.first_name }}</td>
+		</tr>
+		<tr></tr>
+				<td>Tipo</td>
+				<td>H</td>
+				<td>D</td>
+				<td>A</td>
+				<td>L</td>
+				<td>G</td>
+				<td>EG</td>
+				<td>Cnt.</td>
+				<td>Área Und.</td>
+				<td>Área Tot.</td>
+				<td>Disponible</td>
+			</tr>		
+	</thead>
+	<tbody>
+		{% for item in cotiz.itemmallacriba_set.all %}
+		<tr>
+			<td>{{ item.precio.tipo_malla }}</td>
+			<td>{{ item.hueco }}</td>
+			<td>{{ item.diametro }}</td>
+			<td>{{ item.ancho }}</td>
+			<td>{{ item.largo }}</td>
+			<td>{{ item.tipo_gancho }}</td>
+			<td>{{ item.tipo_enganche }}</td>
+			<td>{{ item.cantidad }}</td>
+			<td>{{ item.area_unidad }}</td>
+			<td>{{ item.area_total }}</td>
+			<td><a href="{% url 'aprobacion_pn_criba_item' item.pk %}">Ver</a></td>
+		</tr>
+		{% endfor %}
+	{% endfor %}
+</tbody>
+</table>
+{% endblock %}

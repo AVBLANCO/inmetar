@@ -1,0 +1,41 @@
+{% extends 'gestion/base_comercial.html' %}
+{% block content %}
+{% load humanize %}
+
+    <h2>Lista de Precios</h2>
+    <table>
+	<style>
+	th, td {
+	  border-bottom: 1px solid #ddd;
+	  padding: 10px 5px 10px 5px
+	}
+	</style>
+	<tr>
+		<td>Tipo</td>
+		<td>Referencia</td>
+		<td>Hueco (mm)</td>
+		<td>Diámetro (mm)</td>
+		<td>Precio m<sup>2</sup><br>Zona 1</td>
+		<td>Precio m<sup>2</sup><br>Zona 2</td>
+		<td>Precio m<sup>2</sup><br>Zona 3</td>
+		<td>Precio m<sup>2</sup><br>Zona 4</td>
+		<td>Precio m<sup>2</sup><br>Zona 5</td>
+	<tr>
+	{% for item in lista_precios%}
+			<tr>
+				<td>{{ item.tipo_malla }}</td>
+				<td>{{ item.referencia }}</td>
+				<td>{{ item.hueco_mm }}</td>
+				<td>{{ item.diametro }}</td>
+				{% if user.username == 'gerentema' %}
+				<td>${{ item.precio_z1|intcomma}}</td>
+				<td>${{ item.precio_z2|intcomma}}</td>
+				<td>${{ item.precio_z3|intcomma}}</td>
+				<td>${{ item.precio_z4|intcomma}}</td>
+				<td>${{ item.precio_z4|intcomma}}</td>
+				{% endif %}
+			</tr>
+	{% endfor %}
+	</table>
+	<script src='/static/gestion/js/base.js'></script>
+{% endblock %}

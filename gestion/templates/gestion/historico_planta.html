@@ -1,0 +1,52 @@
+{% extends 'gestion/base_comercial.html' %}
+{% block content %}
+<div class="row container-fluid">
+<span class="col-sm-9">
+  <h4>Histórico de Producción de {{planta}}</h4>
+</span>
+<span class="col-sm-3"><a href="{% url 'reportepnplanta' planta.pk %}" class="btn btn-primary"><i class="far fa-file-excel"></i> Generar Excel</a>
+</span>
+</div>
+<table class="table table-sm">
+  <thead>
+    <tr class="bg-success">
+      <th colspan="10%">Fecha</th>
+      <th colspan="10%">ODP</th>
+      <th colspan="10%">H</th>
+      <th colspan="10%">D</th>
+      <th colspan="10%">Ancho</th>
+      <th colspan="10%">Largo</th>
+      <th colspan="10%">Gancho</th>
+      <th colspan="10%">Enganche</th>
+      <th colspan="10%">Cant</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for equipo in planta.equipo_set.all %}
+    <td colspan="100%" class="bg-dark text-white"><strong>{{equipo.denominacion}}</strong></td>
+    {% for mallagenerica in equipo.mallacribagenerica_set.all %}
+    <tr>
+      <td colspan="40%" class="bg-secondary text-white"> </td>
+      <td colspan="20%" class="bg-secondary text-white"><em>Ancho </em>{{mallagenerica.ancho}}cm </td>
+      <td colspan="20%" class="bg-secondary text-white"> <em>Largo </em>{{mallagenerica.largo}}cm </td>
+      <td colspan="20%" class="bg-secondary text-white"><em>Gancho
+        </em>{{mallagenerica.tipo_gancho}}{{mallagenerica.tipo_enganche}}</td>
+    </tr>
+    {% for item in mallagenerica.itemmallacribahistorico_set.all %}
+    <tr>
+      <td colspan="10%">{{item.fecha|date:"Y/m/d"}}</td>
+      <td colspan="10%">{{item.no_odp}}</td>
+      <td colspan="10%">{{item.hueco}}</td>
+      <td colspan="10%">{{item.diametro}}</td>
+      <td colspan="10%">{{item.ancho}}</td>
+      <td colspan="10%">{{item.largo}}</td>
+      <td colspan="10%">{{item.tipo_gancho}}</td>
+      <td colspan="10%">{{item.tipo_gancho}}</td>
+      <td colspan="10%">{{item.cantidad}}</td>
+    </tr>
+    {% endfor %}
+    {% endfor %}
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

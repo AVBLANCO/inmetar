@@ -1,0 +1,10 @@
+{% extends 'gestion/base_comercial.html' %}
+
+{% load static %}
+
+{% block content %}
+<br>
+<h4>Bienvenido, {{ user.get_full_name }}</h4>
+<h6>Usuario: {{ user.username }}</h6>
+<h7>Última sesión: {{ user.last_login }}</h7>
+{% endblock %}

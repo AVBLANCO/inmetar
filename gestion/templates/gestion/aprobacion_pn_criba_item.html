@@ -1,0 +1,51 @@
+{% extends 'gestion/base_comercial.html' %}
+{% block content %}
+{% load humanize %}
+
+   
+  <h2>Ítems con aprobación pendiente</h2>
+
+	<table class="table table-bordered table-sm">
+
+  <thead class="thead-dark">
+		<tr>
+				<td>Tipo</td>
+				<td>H</td>
+				<td>D</td>
+				<td>A</td>
+				<td>L</td>
+				<td>G</td>
+				<td>EG</td>
+				<td>Cnt.</td>
+				<td>Área Und.</td>
+				<td>Área Tot.</td>
+			</tr>		
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{ item.precio.tipo_malla }}</td>
+			<td>{{ item.hueco }}</td>
+			<td>{{ item.diametro }}</td>
+			<td>{{ item.ancho }}</td>
+			<td>{{ item.largo }}</td>
+			<td>{{ item.tipo_gancho }}</td>
+			<td>{{ item.tipo_enganche }}</td>
+			<td>{{ item.cantidad }}</td>
+			<td>{{ item.area_unidad }}</td>
+			<td>{{ item.area_total }}</td>
+		</tr>
+</tbody>
+</table>
+<div class="row">
+{% for mat, item in disp.items %}
+<div class="col"></div>
+  <h5>{{mat}}</h5>
+  <ul>
+  {% for i in item %}
+   <li>{{i.diametro}} {{i.peso_actual}}kg</li>
+  {% endfor %}
+ </ul>
+ <div class="col"></div>
+{% endfor %}
+</div>
+{% endblock %}

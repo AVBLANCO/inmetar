@@ -1,0 +1,53 @@
+{% extends 'gestion/base_comercial.html' %}
+{% block content %}
+<style>
+    .comercial-form textarea,
+    .comercial-form input {
+        width: 100%;
+    }
+</style>
+
+<h3>Aprobación para producción</h3>
+<br>
+<form method="POST">
+    {% csrf_token %}
+<table class="table table-bordered table-sm">
+    <tr>
+        <td class=campo>Producto </td>
+        <td class=campo>Hueco (mm)</td>
+        <td class=campo>Diámetro (mm)</td>
+        <td class=campo>Ancho (cm)</td>
+        <td class=campo>Largo (cm)</td>
+        <td class=campo>Cant.</td>
+        <td class=campo>Área Und. m2</td>
+        <td class=campo>Área Tot. m2</td>
+        <td class=campo><strong>{{ request.user.get_short_name }}</strong><br>aprueba producir.</td>
+    </tr>
+    {% for item in cotizacion.itemmallacriba_set.all %}
+
+    <tr>
+        <td class="align-middle">{{ item.descripcion_verbose }}</td>
+        <td class="align-middle">{{ item.precio.hueco_mm }}</td>
+        <td class="align-middle">{{ item.precio.diametro }}</td>
+        <td class="align-middle">{{ item.ancho }}</td>
+        <td class="align-middle">{{ item.largo }}</td>
+        <td class="align-middle">{{ item.cantidad }}</td>
+        <td class="align-middle">{{ item.area_unidad|floatformat:2 }}</td>
+        <td class="align-middle">{{ item.area_total|floatformat:2 }}</td>
+        <td class="align-middle">
+        {% if item.odpcriba %}
+            <a href="{% url 'detalle_odpcriba' item.odpcriba.pk %}">ODP C-{{item.odpcriba.pk}}</a>
+        {% else %}
+            <input type="checkbox" value="{{ item.pk }}" name="aprobado" id="aprobado">
+            <label for="aprobado"></label>
+        {% endif %}
+        </td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+    
+    <button type="submit" class="save btn btn-primary">Guardar</button>
+</form>
+{% endblock %}

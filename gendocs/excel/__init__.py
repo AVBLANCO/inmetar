@@ -1,0 +1,1 @@
+from .historico_planta import ReporteHistoricoPlanta

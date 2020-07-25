@@ -1,0 +1,63 @@
+{% extends 'produccion/base_produccion.html' %}
+
+{% load static %}
+
+{% block content %}
+<h2>Inventario Criba</h2>
+<div class="row">
+  {% for material, item in resumen.items %}
+  <div class="col">
+  <table class="table table-bordered table-sm">
+  <thead>
+    <tr>
+      <th colspan="3"><h4>{{material}}</h4></th>
+    </tr>
+    <tr>
+      <td>Diám.</td>
+      <td>Peso (kg)</td>
+      <td>Cant.</td>
+    </tr>
+  </thead>
+  <tbody>
+  {% for diametro, info in item.items %}
+  <tr>
+    <td>{{ diametro }}</td>
+    <td>{{ info.suma }}</td>
+    <td>{{ info.count }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+  </table>
+  </div>
+  {% endfor %}
+
+</div>
+
+
+  
+
+<table class="table table-bordered table-sm">
+  <thead>
+    <tr>
+      <th>Material</th>
+      <th>No.</th>
+      <th>Diámetro</th>
+      <th>Peso Inicial</th>
+      <th>Peso Actual</th>
+      <th>Fecha Cargue</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for rollo in rollos %}
+    <tr>
+      <td>{{ rollo.material }}</td>
+      <td>{{ rollo.identificador }}</td>
+      <td>{{ rollo.diametro }}</td>
+      <td>{{ rollo.peso_inicial }}</td>
+      <td>{{ rollo.peso_actual }}</td>
+      <td>{{ rollo.fecha_recibo }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

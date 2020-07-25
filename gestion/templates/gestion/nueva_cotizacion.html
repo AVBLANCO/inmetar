@@ -1,0 +1,16 @@
+{% extends 'gestion/base_comercial.html' %}
+{% block content %}
+<style>
+	.comercial-form textarea, .comercial-form input{
+		width: 100%;
+	}
+</style>
+    <h2>Crear nueva cotización</h2>
+    <br>
+    {% load crispy_forms_tags %}
+    <form method="POST" class="comercial-form">{% csrf_token %}
+        {{ form|crispy }}
+        
+        <button type="submit" class="save btn btn-primary">Continuar</button>
+    </form>
+{% endblock %}

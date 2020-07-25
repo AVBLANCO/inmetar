@@ -1,0 +1,28 @@
+{% extends 'gestion/base_comercial.html' %}
+{% block content %}
+{% load humanize %}
+
+   
+  <h2>Cotizaciones de {{ user.first_name }}</h2>
+  <a href="{% url 'nueva_cotizacion' %}" class="btn btn-info" role="button">Nueva Cotización</a>
+
+  <table class="table-sm table-light table-hover">
+  <thead class="thead dark">
+	<tr>
+		<td>No.</td>
+		<td>Cliente</td>
+		<td>Planta</td>
+		<td>Fecha</td>
+	<tr>
+  </thead>
+	{% for cotiz in object_list %}
+			<tr>
+				<td>{{ cotiz.id }}</td>
+				<td><a href={% url "detalle_cotizacion" cotiz.pk %}>
+					{{ cotiz.cliente.razon_social }}</a></td>
+				<td>{{ cotiz.planta.denominacion }}</td>
+				<td>{{ cotiz.fecha }}</td>
+			</tr>
+	{% endfor %}
+	</table>
+{% endblock %}

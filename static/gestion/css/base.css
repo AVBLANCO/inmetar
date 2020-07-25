@@ -1,0 +1,16 @@
+#jt_enc{
+  background: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255,255,255,.5) 5px, rgba(255,255,255,.5) 10px),	            
+      repeating-linear-gradient(-45deg, transparent, transparent 5px, rgba(255,255,255,.5) 5px, rgba(255,255,255,.5) 10px),
+      rgb(102, 212, 87);
+      padding: 20px 40px 20px 80px;
+    }
+  #divlogo{
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.8); 
+    padding: 10px 20px 10px 20px;
+  }
+  #divsis{
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.8); 
+    padding: 20px 20px 10px 20px;
+  }

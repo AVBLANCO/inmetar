@@ -1,0 +1,80 @@
+{% extends 'gestion/base_comercial.html' %}
+{% load static %}
+{% block content %}
+<h2>Detalle Cotización</h2>
+
+<style>
+    .campo{
+        background-color: rgb(220, 255, 222);
+        font-weight: bold;
+    }
+    .contenido{
+        background-color: rgb(255, 255, 255);
+    }
+</style>
+<table class="table table-bordered table-sm">
+    <tr>
+        <td class=campo>Fecha</td><td class=contenido>{{ cotizacion.fecha }}</td>
+        <td class=campo>NIT</td><td class=contenido>{{ cotizacion.cliente.nit }}</td>
+    </tr>
+    <tr>
+        <td class=campo>Cliente</td><td class=contenido>{{ cotizacion.cliente.razon_social }}</td>
+        <td class=campo>Departamento</td><td class=contenido>{{ cotizacion.cliente.departamento_verbose }}</td>
+    </tr>
+    <tr>
+        <td class=campo>Dirección</td><td class=contenido>{{ cotizacion.cliente.direccion }}</td>
+        <td class=campo>Usuario</td><td class=contenido>{{ cotizacion.autor.get_username }}</td>
+    </tr>
+</table>
+<br>
+<h4>Ítems</h4>
+<table class="table table-bordered table-sm">
+    <tr>
+        <td class=campo>Descripción</td>
+        <td class=campo>Hueco (mm)</td>
+        <td class=campo>Diámetro (mm)</td>
+        <td class=campo>Ancho (cm)</td>
+        <td class=campo>Largo (cm)</td>
+        <td class=campo>Cant.</td>
+        <td class=campo>Área Und. m2</td>
+        <td class=campo>Área Tot. m2</td>
+    </tr>
+{% for item in cotizacion.itemmallacriba_set.all %}
+
+<tr>
+    <td class="align-middle">{{ item.descripcion_verbose }}</td>
+    <td class="align-middle">{{ item.precio.hueco_mm }}</td>
+    <td class="align-middle">{{ item.precio.diametro }}</td>
+    <td class="align-middle">{{ item.ancho }}</td>
+    <td class="align-middle">{{ item.largo }}</td>
+    <td class="align-middle">{{ item.cantidad }}</td>
+    <td class="align-middle">{{ item.area_unidad|floatformat:2 }}</td>
+    <td class="align-middle">{{ item.area_total|floatformat:2 }}</td>
+    <td class="align-middle">
+        <a href="{% url 'editar_item' item.pk %}" class="fas fa-edit" role="button"></a>
+        <a href="{% url 'borrar_item' item.pk %}" class="fas fa-eraser" role="button"></a>
+    </td>
+</tr>
+    
+{% endfor %}
+</table> 
+
+<br>
+    <a href="{% url 'nuevo_item' cotizacion.pk %}" class="btn btn-info" role="button">Nuevo<br>Ítem</a>
+    <a href="{% url 'pdfcotizacion' cotizacion.pk %}" class="btn btn-info" role="button">Generar PDF<br>Inmetar SAS</a>
+    <a href="{% url 'pdfcotizacionmaa' cotizacion.pk %}" class="btn btn-info" role="button">Generar PDF<br>MAA</a>
+    <a href="{% url 'aprobacion_malla_criba' cotizacion.pk %}" class="btn btn-info" role="button">Aprobación de<br>Producción</a>
+
+    <br>
+
+<br>
+
+  <script>
+    $(document).ready(function(){
+      $("#myBtn").click(function(){
+        $("#myModal").modal();
+      });
+    });
+ </script>
+ 
+{% endblock content %}

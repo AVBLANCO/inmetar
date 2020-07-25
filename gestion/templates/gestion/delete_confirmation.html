@@ -1,0 +1,11 @@
+{% extends 'gestion/base_comercial.html' %}
+{% block content %}
+{% load humanize %}
+
+
+<form method="post">{% csrf_token %}
+  <h5>Está seguro/a de eliminar "{{ object }}"?</h5>
+  <input type="submit" value="Confirmar">
+</form>
+
+{% endblock %}

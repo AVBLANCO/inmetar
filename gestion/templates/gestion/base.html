@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <title>Inmetar SGI</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href={% static "gestion/css/base.css" %}>
+  <link rel="icon" type="image/png" href="http://inmetar.com/img/favicon-32x32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" sizes="180x180" href="https://inmetar.com/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="https://inmetar.com/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="https://inmetar.com/favicon-16x16.png" sizes="16x16">
+
+</head>
+
+<body>
+  <div class="container-fluid text-center text-white bg-danger" style="padding: 0px">
+    <strong>Última act. 25/06/2020</strong></div>
+  <div class="jumbotron jumbotron-fluid text-center" style="margin-bottom:0" id="jt_enc">
+    <div class="d-sm-flex justify-content-md-between">
+      <div id=divsis>
+        <h3>ERP v1.0</h3>
+      </div>
+      <div id=divlogo><img src="/static/img/logo.png" align="center"></div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-sm bg-success navbar-dark justify-content-center">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        {% if user.is_authenticated %}
+        <a id="username_label" class="nav-link active" data-placement="bottom" href="#" data-toggle="tooltip"
+          title="{{ user.first_name }}">
+          <span class="fas fa-user-circle"></span><i> {{ user.username }}</i></a>
+        </a>
+        {% else %}
+        <a class="nav-link" href="{% url 'login'%}?next={{request.path}}">Inicie Sesión</a>
+        {% endif %}
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <span style="margin-left: 20px;"></span>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/">Comercial</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/pn/criba">Producción</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin">Administración</a>
+      </li>
+      <li class="nav-item">
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout'%}?next={{request.path}}" class="nav-link">Salir</a>
+        {% else %}
+        <a href="{% url 'login'%}?next={{request.path}}" class="nav-link active">Ingresar</a>
+        {% endif %}
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container" style="padding: 0px 10px 10px 10px">
+
+    <div class="row">
+
+      <div class="col-md-2">
+        {% block bar %}
+        {% endblock bar %}
+      </div>
+
+      <div class="col-md-10">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+
+    <div class="container-fluid text-success text-center" style="margin-bottom:0; padding:10px">
+      <p>Industrias Metálicas Arévalo S.A.S.
+        Norte de Santander, Colombia<br>
+        Desarrollo: Daniel A. Esteban</p>
+    </div>
+    <script>
+
+      var algo = $('[data-toggle="tooltip"]');
+      algo.tooltip();
+  // console.log(algo)
+
+// });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+{% extends 'gestion/base_comercial.html' %}
+{% block content %}
+<!-- <style>
+	.comercial-form textarea, .comercial-form input{
+		width: 100%;
+	}
+</style> -->
+
+    <br>
+    <h5>{{titulo}}</h5>
+    <h4>{{padre}}</h4>
+    <form method="POST" class="comercial-form">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="save btn btn-primary">Guardar</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'gestion/base.html' %}
+
+{% block bar %}
+
+<style>
+  #div_seccion{
+    background-color: lightgreen;
+    text-align: center;
+    height: 30px;
+  }
+
+</style>
+<div id="div_seccion"><h5>Producción</h5></div>
+<div class="navbar-light bg-light text-dark">
+    <ul class="nav nav-pills bg-light text-dark">
+      {% for item in sb %}
+        <li class="nav-item container-fluid" style="padding: 0px; ">
+          {% if request.resolver_match.url_name == item.2 %}
+          <a class="nav-link active bg-success" href="{% url item.2 %}">
+          {% else %}  
+          <a class="nav-link text-dark" href="{% url item.2 %}">
+          {% endif %}
+            <span class="{{ item.1 }}"></span>
+            {{item.0}}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+    </div>
+    
+{% endblock bar %}
+

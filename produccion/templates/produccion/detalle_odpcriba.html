@@ -1,0 +1,57 @@
+{% extends 'produccion/base_produccion.html' %}
+{% load static %}
+{% block content %}
+<h2>Detalle Orden de Producción</h2>
+
+<style>
+    .campo{
+        background-color: rgb(220, 255, 222);
+        font-weight: bold;
+    }
+    .contenido{
+        background-color: rgb(255, 255, 255);
+    }
+</style>
+<table class="table table-bordered table-sm">
+    <tr>
+        <td class=campo>Fecha</td><td class=contenido>{{ odp.t_aprobacion_cliente.date }}</td>
+        <td class=campo>Hueco</td><td class=contenido>{{ odp.item.hueco }}</td>
+        <td class=campo>Diámetro</td><td class=contenido>{{ odp.item.diametro }}</td>
+    </tr>
+    <tr>
+        <td class=campo>Ancho</td><td class=contenido>{{ odp.item.ancho }}</td>
+        <td class=campo>Largo</td><td class=contenido>{{ odp.item.largo }}</td>
+        <td class=campo>Área Total</td><td class=contenido>{{ odp.item.area_total|floatformat:2 }}</td>
+    </tr>
+    <tr>
+        <td class=campo>Número ODP</td><td class=contenido>{{ odp.id }}</td>
+        <td class=campo>Cliente</td><td class=contenido>{{ odp.cliente.razon_social }}</td>
+        <td class=campo>Planta</td><td class=contenido>{{ odp.planta.denominacion }}</td>
+    </tr>   
+    <tr>
+        <td class=campo>Cantidad</td><td class=contenido>{{ odp.item.cantidad }}</td>
+        <td class=campo>Largueros</td><td class=contenido>{{ odp.largueros_cant }}</td>
+        <td class=campo>Traviesas</td><td class=contenido>{{ odp.traviesas_cant }}</td>
+    </tr>
+        
+    
+    <tr>
+        <td class=campo>Tipo Malla</td><td class=contenido>{{ odp.item.tipo_malla }}</td>
+        <td class=campo>Tipo Gancho</td><td class=contenido>{{ odp.item.tipo_gancho }}</td>
+        <td class=campo>Tipo Enganche</td><td class=contenido>{{ odp.item.tipo_enganche }}</td>
+    </tr>    
+    <tr>
+        <td class=campo>Paso Sugerido</td><td class=contenido>{{ odp.paso }}</td>
+        <td class=campo>Densidad</td><td class=contenido>{{ odp.item.densidad|floatformat:2 }}</td>
+        <td class=campo>Peso Teórico</td><td class=contenido>{{ odp.item.peso_teorico_total|floatformat:2 }}</td>
+    </tr>
+</table>
+<br>
+
+<br>
+
+    
+    <a href="{% url 'pdfodpcriba' odp.pk %}" class="btn btn-info" role="button">Generar PDF</a>
+    <br>
+ 
+{% endblock content %}

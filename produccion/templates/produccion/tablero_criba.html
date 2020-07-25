@@ -1,0 +1,45 @@
+{% extends 'produccion/base_produccion.html' %}
+
+{% load static %}
+
+{% block content %}
+<h3>Producción Malla Criba</h3>
+
+
+<table class="table table-bordered table-sm">
+	<style>
+    </style>
+    
+    
+    <tr>
+		<td>Producto</td>
+		<td>Cliente</td>
+		<td>Planta</td>
+		<td>No. ODP</td>
+		<td>Hueco</td>
+		<td>Calibre</td>
+        <td>Ancho</td>
+        <td>Largo</td>
+        <td>Gan/Eng</td>
+        <td>Cant.</td>
+        <td>Estado</td>
+	</tr>   
+
+    {% for odp in odps %}
+
+    <tr>
+        <td>{{ odp.item.tipo_malla }}</td>
+        <td>{{ odp.item.cotizacion.cliente.razon_social }}</td>
+        <td>{{ odp.item.cotizacion.planta.denominacion }}</td>
+        <td><a href="{% url 'detalle_odpcriba' odp.pk %}">{{ odp.pk }}</a></td>
+        <td>{{ odp.item.hueco }}</td>
+        <td>{{ odp.item.diametro }}</td>
+        <td>{{ odp.item.ancho }}</td>
+        <td>{{ odp.item.largo }}</td>
+        <td>{{ odp.item.tipo_gancho }}/{{ odp.item.tipo_enganche }}</td>
+        <td>{{ odp.item.cantidad }}</td>
+        <td>{{ odp.estado }}</td>
+    </tr>
+	{% endfor %}
+	</table>
+    {% endblock %}

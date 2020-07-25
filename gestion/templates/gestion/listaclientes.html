@@ -1,0 +1,27 @@
+{% extends 'gestion/base_comercial.html' %}
+{% block content %}
+{% load humanize %}
+
+   
+  <h2>Clientes de {{ user.get_username }}</h2>
+	<a href="{% url 'nuevo_cliente' %}" class="btn btn-info" role="button"><i class="fas fa-plus-circle"></i>
+				Crear Cliente</a>
+  <table class="table-sm table-light table-hover">
+  <thead class="thead dark">
+	<tr>
+		<td></td>
+		<td>Razon Social</td>
+		<td>NIT</td>
+		<td>Dpto</td>
+	<tr>
+  </thead>
+	{% for item in object_list %}
+			<tr>
+				<td>{% if item.planta_set.all %}<i class="fas fa-clipboard-check text-success"></i>{% else %}<i class="fas fa-clipboard text-secondary"></i>{% endif %}</td>
+				<td><a href={% url "detalle_cliente" item.pk %}>{{ item.razon_social }}</a></td>
+				<td>{{ item.nit }}</td>
+				<td>{{ item.ciudad }}</td>
+			</tr>
+	{% endfor %}
+	</table>
+{% endblock %}
