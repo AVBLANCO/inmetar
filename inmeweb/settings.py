@@ -25,7 +25,7 @@ SECRET_KEY = 'u!&lvxd=235iw3cqtol6!qej7)-&ozp7w(4qd&_x!pfp75%q4-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1:8000', '167.172.141.15', 'localhost', 'sg.inmetar.com']
+ALLOWED_HOSTS = ['localhost:8000', '167.172.141.15', 'localhost', 'sg.inmetar.com']
 
 
 # Application definition
